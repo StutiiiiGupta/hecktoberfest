@@ -1,24 +1,27 @@
-# Binary Search: Implement a binary search algorithm
-def binary_search(list, item):
-    low = 0
-    high = len(list) - 1
+def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
 
-    while low <= high:
-        mid = int((low + high) / 2)
-        guess = list[mid]
+    while left <= right:
+        mid = (left + right) // 2
 
-        if guess == item:
-            return mid
-
-        if guess > item:
-            high = mid - 1
-
+        if arr[mid] == target:
+            return mid 
+        elif arr[mid] < target:
+            left = mid + 1 
         else:
-            low = mid + 1
+            right = mid - 1 
 
-    return None
+    return -1  
 
-if __name__ == "__main__":
-    my_list = [1, 3, 5, 7, 9]
-    print(binary_search(my_list, 3))
-    print(binary_search(my_list, 0))
+arr_str = input("Enter a sorted array of numbers (space-separated): ")
+arr = list(map(int, arr_str.split()))
+
+
+target = int(input("Enter the target element to search for: "))
+
+result = binary_search(arr, target)
+
+if result != -1:
+    print(f"Element {target} found at index {result}")
+else:
+    print(f"Element {target} not found in the array")
